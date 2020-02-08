@@ -1,3 +1,5 @@
+
+
 const initState = {
     posts: [
          {userId: 1, id: 1, title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit", body: "quia et suscipit↵suscipit recusandae consequuntur …strum rerum est autem sunt rem eveniet architecto"}
@@ -7,6 +9,21 @@ const initState = {
 }
 
 const rootReducer = (state = initState, action) => {
+    if(action.type === 'DELETE_POST'){
+        let newPosts = state.posts.filter( x => x.id != action.id);
+       return {
+           ...state,
+           posts: newPosts
+       }
+    }else if (action.type === 'ADD_POST'){
+        console.log(action)
+        action.post.id = Math.floor(Math.random() * Math.floor(10));
+        return{
+            ...state,
+            posts: [...state.posts, action.post]
+        }
+    }
+
     return state;
 }
 
